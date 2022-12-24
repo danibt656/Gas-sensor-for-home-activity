@@ -10,18 +10,18 @@
 
 ## Importing libraries
 import numpy as np
-import pylab as pl
+import matplotlib.pyplot as pl
 import pandas as pd
 import matplotlib.gridspec as gridspec
 
 
 ## Defining input files and times
-banana_id = 17.
-wine_id   = 19.
+banana_id = 17
+wine_id   = 19
 
 
 ## Importing metadata and induction information
-metadata = np.loadtxt('HT_Sensor_metadata.dat', skiprows=1, dtype=str)
+metadata = np.loadtxt('./data/ori/HT_Sensor_metadata.dat', skiprows=1, dtype=str)
 metadata_aux = np.array( metadata[:,[0,3,4]], dtype=float )
 
 banana_info = metadata_aux[banana_id]
@@ -34,7 +34,7 @@ wtf = wt0 + wine_info[2]
 
 
 ## Loading the dataset
-dataset = np.loadtxt('HT_Sensor_dataset.dat', skiprows=1)
+dataset = np.loadtxt('./data/ori/HT_Sensor_dataset.dat', skiprows=1)
 
 bData = dataset[dataset[:,0] == banana_id,1:]
 bData[:,0] += bt0
@@ -149,8 +149,8 @@ ax[3,0].set_ylabel(r"$R_{2,3}$ (k$\Omega$)")
 ax[4,0].set_ylabel(r"$R_{5,6}$ (k$\Omega$)")
 ax[5,0].set_ylabel(r"$R_{7,8}$ (k$\Omega$)")
 
-ax[5,0].set_xticklabels(['6.0','','6.5','','7.0','','7.5'])
-ax[5,1].set_xticklabels(['22.0','','22.5','','23.0','','23.5'])
+ax[5,0].set_xticklabels(['6.0','','6.5','','7.0','','7.5', ''])
+ax[5,1].set_xticklabels(['22.0','','22.5','','23.0','','23.5', ''])
 ax[5,0].set_xlabel("Time (h)")
 ax[5,1].set_xlabel("Time (h)")
 
