@@ -6,3 +6,5 @@ __pycache__/
 
 data/HT_Sensor_dataset.dat
 data/ori/HT_Sensor_dataset.dat
+
+./*.png

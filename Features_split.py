@@ -10,7 +10,7 @@
 
 ## Importing libraries
 import numpy as np
-import pylab as pl
+import matplotlib.pyplot as pl
 
 
 ## Should create plots of the inductions after subsampling?
