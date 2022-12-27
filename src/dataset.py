@@ -17,7 +17,7 @@ DATA_F = "./data/HT_Sensor_dataset.dat"
 FEATURES_ORIGINAL = ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7', 'R8', 'Temp.', 'Humidity']
 
 
-class Dataset(Object):
+class Dataset():
   """
   Clase usada para encapsular el dataset
   
@@ -26,21 +26,26 @@ class Dataset(Object):
   """
 
   
-  def __init__(self):
+  def __init__(self, md_fn, d_fn):
+    """
+    
+    Args:
+      md_fn: Ruta del fichero de metadatos
+      d_fn: Ruta del fichero de dataset
+    """
+    self.meta_f = md_fn
+    self.data_f = d_fn
     self.df = self.build_dataframe()
     
   
-  def join_metadata_dataset(metadata_f, dataset_f):
+  def join_metadata_dataset(self):
     """
     Une los metadatos con la BD principal de las series usando el campo
     'id' para el join
-    
-    Attrs:
-      metadata_f: Nombre del fichero con los metadatos
-      dataset_f: Nombre del fichero con las series
     """
-    df_meta = pd.read_csv(metadata_f, delimiter='\t+', engine='python')
-    df_data = pd.read_csv(dataset_f, delimiter='\s+', engine='python')
+    
+    df_meta = pd.read_csv(self.meta_f, delimiter=',+', engine='python')
+    df_data = pd.read_csv(self.data_f, delimiter=',+', engine='python')
     
     df_data.set_index('id', inplace=True)
     # Hacer un inner join de metadatos con series
@@ -72,7 +77,7 @@ class Dataset(Object):
     Return:
       Un Dataframe de pandas con el dataset
     """
-    join_df = self.join_metadata_dataset(META_F, DATA_F)
+    join_df = self.join_metadata_dataset()
     
     # TODO construir dataset con atributos elegidos
     
