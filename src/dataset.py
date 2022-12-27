@@ -12,8 +12,8 @@ import numpy as np
 import pandas as pd
 
 
-META_F = "./data/ori/HT_Sensor_metadata.dat"
-DATA_F = "./data/ori/HT_Sensor_dataset.dat"
+META_F = "./data/HT_Sensor_metadata.dat"
+DATA_F = "./data/HT_Sensor_dataset.dat"
 FEATURES_ORIGINAL = ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7', 'R8', 'Temp.', 'Humidity']
 
 
@@ -39,19 +39,19 @@ class Dataset(Object):
       metadata_f: Nombre del fichero con los metadatos
       dataset_f: Nombre del fichero con las series
     """
-    df_meta = pd.read_csv(meta_f, delimiter='\t+', engine='python')
+    df_meta = pd.read_csv(metadata_f, delimiter='\t+', engine='python')
     df_data = pd.read_csv(dataset_f, delimiter='\s+', engine='python')
     
-    df_db.set_index('id', inplace=True)
+    df_data.set_index('id', inplace=True)
     # Hacer un inner join de metadatos con series
-    df_db.join(df_meta, how='inner')
+    df_data.join(df_meta, how='inner')
     
     # Recalcular time (para que no haya tiempos negativos)
-    df_db['time'] += df_db['t0']
+    df_data['time'] += df_data['t0']
     
-    df_db.set_index(np.arange(df_db.shape[0]), inplace=True)
+    df_data.set_index(np.arange(df_data.shape[0]), inplace=True)
     
-    return df_db
+    return df_data
     
    
   def build_dataframe(self):
@@ -61,18 +61,18 @@ class Dataset(Object):
     
     IDEAS DE ATRIBUTOS:
       - Media y mediana de los ultimos X mins
-      - Desviación de los últimos X mins
+      - Desviación de los ultimos X mins
       - Umbral de desviación para ver si es vino o cambio de pendiente
       - Numero de muestras del intervalo de los últimos X minutos
       - Lo de las 5 “sigmas”
 
       'X' debería ser no muy grande: si queremos hacer datos en tiempo real,
-      poner una ventana de los ultimos 15 minutos es un poco obstáculo
+      poner una ventana pequeña, por ejemplo 5 minutos.
     
     Return:
       Un Dataframe de pandas con el dataset
     """
-    join_df = join_metadata_dataset(META_F, DATA_F)
+    join_df = self.join_metadata_dataset(META_F, DATA_F)
     
     # TODO construir dataset con atributos elegidos
     
@@ -99,7 +99,7 @@ class Dataset(Object):
     test_indices = np.random.choice(list(set(self.df['id'])), size=num_test, replace=False)
     
     is_for_test = []
-    for id in self.df.id:
+    for id in self.df['id']:
       if id in test_indices:
         is_for_test.append(True)
       else:
@@ -110,7 +110,7 @@ class Dataset(Object):
     test_df = self.df[is_for_test]
     
     # Dividir entre atributos y clases
-    X_train, y_train = train_df[attrs].values, df_train['class'].values
+    X_train, y_train = train_df[attrs].values, train_df['class'].values
     X_test, y_test = test_df[attrs].values, test_df['class'].values
     
     return X_train, y_train, X_test, y_test

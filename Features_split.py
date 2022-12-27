@@ -17,14 +17,14 @@ import matplotlib.pyplot as pl
 createPlot = False
 
 ## Importing metadata and induction information
-metadata = np.loadtxt('./data/ori/HT_Sensor_metadata.dat', skiprows=1, dtype=str)
+metadata = np.loadtxt('./data/HT_Sensor_metadata.dat', skiprows=1, dtype=str)
 metadata[ metadata[:,2] == "wine", 2 ] = 2
 metadata[ metadata[:,2] == "banana", 2 ] = 2
 metadata[ metadata[:,2] == "background", 2 ] = 0
 metadata = np.array( metadata[:,[0,2,3,4]], dtype=float )
 
 ## Loading the dataset
-dataset = np.loadtxt('./data/ori/HT_Sensor_dataset.dat', skiprows=1)
+dataset = np.loadtxt('./data/HT_Sensor_dataset.dat', skiprows=1)
 
 
 ## Useful definitions

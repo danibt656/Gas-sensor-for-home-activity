@@ -21,7 +21,7 @@ wine_id   = 19
 
 
 ## Importing metadata and induction information
-metadata = np.loadtxt('./data/ori/HT_Sensor_metadata.dat', skiprows=1, dtype=str)
+metadata = np.loadtxt('./data/HT_Sensor_metadata.dat', skiprows=1, dtype=str)
 metadata_aux = np.array( metadata[:,[0,3,4]], dtype=float )
 
 banana_info = metadata_aux[banana_id]
@@ -34,7 +34,7 @@ wtf = wt0 + wine_info[2]
 
 
 ## Loading the dataset
-dataset = np.loadtxt('./data/ori/HT_Sensor_dataset.dat', skiprows=1)
+dataset = np.loadtxt('./data/HT_Sensor_dataset.dat', skiprows=1)
 
 bData = dataset[dataset[:,0] == banana_id,1:]
 bData[:,0] += bt0
