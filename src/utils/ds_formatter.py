@@ -1,8 +1,15 @@
+# -*- coding: utf-8 -*-
 """
-Los datos en bruto no presentan un formato CSV de separador único.
+Los datos en bruto no presentan un formato CSV de separador unico.
 
-Este script, lo formateará a un CSV con separador ','.
+Este modulo lo formateara a un CSV con separador ','
+
+Author:   Carlos Anivarro Batiste
+Author:   Daniel Barahona Martin
+Author:   Daniel Cerrato Sanchez
+Author:   David Garitagoitia Romero
 """
+
 
 def format_all(md_old_fn, md_new_fn, d_old_fn, d_new_fn):
     """
@@ -20,6 +27,7 @@ def format_all(md_old_fn, md_new_fn, d_old_fn, d_new_fn):
     format_metadata(md_old_fn, md_new_fn)
     format_dataset(d_old_fn, d_new_fn)
 
+
 def format_dataset(old_fn, new_fn):
     """
     Formatea el fichero de dataset a CSV con ','.
@@ -30,18 +38,18 @@ def format_dataset(old_fn, new_fn):
     """
     
     with open(old_fn, 'r') as f:
-        with open(new_fn, 'w') as to_f:
-            
-            # Headers
-            f.readline()
-            
-            headers = "id,time,R1,R2,R3,R4,R5,R6,R7,R8,Temp.,Humidity\r\n"
-            to_f.write(headers)
-            
-            for line in f:
-                new_line = line[:-3].replace('  ', ',') # 2 spaces per attribute
-                new_line += '\r\n'
-                to_f.write(new_line)
+      with open(new_fn, 'w') as to_f:
+        # Headers
+        f.readline()
+        
+        headers = "id,time,R1,R2,R3,R4,R5,R6,R7,R8,Temp.,Humidity\r\n"
+        to_f.write(headers)
+        
+        for line in f:
+          new_line = line[:-3].replace('  ', ',') # 2 spaces per attribute
+          new_line += '\r\n'
+          to_f.write(new_line)
+
 
 def format_metadata(old_fn, new_fn):
     """
@@ -53,15 +61,14 @@ def format_metadata(old_fn, new_fn):
     """
     
     with open(old_fn, 'r') as f:
-        with open(new_fn, 'w') as to_f:
-            
-            # Headers
-            f.readline()
-            
-            headers = "id,date,class,t0,dt\r\n"
-            to_f.write(headers)
-            
-            for line in f:
-                new_line = line.replace('\t', ',') # 1 tab per attribute
-                to_f.write(new_line)
+      with open(new_fn, 'w') as to_f:
+        # Headers
+        f.readline()
+        
+        headers = "id,date,class,t0,dt\r\n"
+        to_f.write(headers)
+        
+        for line in f:
+          new_line = line.replace('\t', ',') # 1 tab per attribute
+          to_f.write(new_line)
             
