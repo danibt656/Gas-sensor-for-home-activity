@@ -14,5 +14,13 @@ Project authors:
 
 ***
 
+Ideas:
+
++ Hipotesis: Temp. y Hum. no influyen porque apenas se ven alteradas. Crear modelo con y sin estas columnas y ver si cambia algo para validar la hipotesis.
+
++ 
+
+***
+
 Original authors:
 Ramon Huerta, Thiago Mosqueiro, Jordi Fonollosa, Nikolai Rulkov, Irene Rodriguez-Lujan. Online Decorrelation of Humidity and Temperature in Chemical Sensors for Continuous Monitoring. Chemometrics and Intelligent Laboratory Systems 2016.
