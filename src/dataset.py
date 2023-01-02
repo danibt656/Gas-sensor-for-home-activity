@@ -121,38 +121,38 @@ def build_dataframe(ds_filename, time_window):
       print('OK')
     
 
-def train_test_split(df, frac_test, attrs=FEATURES_ORIGINAL):
-  """
-  Divide un dataset en subconjuntos de entrenamiento y validacion
+# def train_test_split(df, frac_test, attrs=FEATURES_ORIGINAL):
+#   """
+#   Divide un dataset en subconjuntos de entrenamiento y validacion
   
-  Args:
-    frac_test: Porcentaje (sobre 100) de muestras para validacion
-    attrs: Lista de atributos para datos (SIN clase)
+#   Args:
+#     frac_test: Porcentaje (sobre 100) de muestras para validacion
+#     attrs: Lista de atributos para datos (SIN clase)
     
-  Return:
-    X_train:  dataframe con datos de entrenamiento
-    y_train:  dataframe con clases de entrenamiento
-    X_test:   dataframe con datos de validacion
-    y_test:   dataframe con clases de validacion
-  """
-  # Construir particiones train/test
-  num_ids = len(set(df['id']))
-  num_test = np.floor((frac_test/100) * num_ids)
-  test_indices = np.random.choice(list(set(df['id'])), size=num_test, replace=False)
+#   Return:
+#     X_train:  dataframe con datos de entrenamiento
+#     y_train:  dataframe con clases de entrenamiento
+#     X_test:   dataframe con datos de validacion
+#     y_test:   dataframe con clases de validacion
+#   """
+#   # Construir particiones train/test
+#   num_ids = len(set(df['id']))
+#   num_test = np.floor((frac_test/100) * num_ids)
+#   test_indices = np.random.choice(list(set(df['id'])), size=num_test, replace=False)
   
-  is_for_test = []
-  for id in df['id']:
-    if id in test_indices:
-      is_for_test.append(True)
-    else:
-      is_for_test.append(False)
-  is_for_test = np.asarray(is_for_test)
+#   is_for_test = []
+#   for id in df['id']:
+#     if id in test_indices:
+#       is_for_test.append(True)
+#     else:
+#       is_for_test.append(False)
+#   is_for_test = np.asarray(is_for_test)
   
-  train_df = df[~is_for_test]
-  test_df = df[is_for_test]
+#   train_df = df[~is_for_test]
+#   test_df = df[is_for_test]
   
-  # Dividir entre atributos y clases
-  X_train, y_train = train_df[attrs].values, train_df['class'].values
-  X_test, y_test = test_df[attrs].values, test_df['class'].values
+#   # Dividir entre atributos y clases
+#   X_train, y_train = train_df[attrs].values, train_df['class'].values
+#   X_test, y_test = test_df[attrs].values, test_df['class'].values
   
-  return X_train, y_train, X_test, y_test
+#   return X_train, y_train, X_test, y_test
