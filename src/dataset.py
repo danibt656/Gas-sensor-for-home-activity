@@ -37,7 +37,7 @@ FEATURES = [
 ]
 
 
-def get_dataset(build_dataset=False, time_window=5):
+def get_dataset(build_dataset=False, time_window=5, margin=10):
   """
   Devuelve un Dataframe con el dataset si este existe, y si no lo crea
   Tambien se puede indicar si se quiere recalcular el dataset
@@ -51,14 +51,14 @@ def get_dataset(build_dataset=False, time_window=5):
   """
   # Si el fichero no existe o esta vacio, construirlo
   if build_dataset or os.stat(F_FINAL_DATASET).st_size == 0 or not os.path.exists(F_FINAL_DATASET):
-    build_dataframe(F_FINAL_DATASET, time_window)
+    build_dataframe(F_FINAL_DATASET, time_window, margin)
   
   ds = pd.read_csv(F_FINAL_DATASET, sep=",")
   return ds
   
   
  
-def build_dataframe(ds_filename, time_window):
+def build_dataframe(ds_filename, time_window, MARGIN):
   """
   Construye un dataset con atributos al uso para poder
   ejecutar experimentos de ML y lo guarda a un CSV
@@ -82,17 +82,18 @@ def build_dataframe(ds_filename, time_window):
       2. Calcular media, mediana y desv. de cada sensor, temperatura y humedad en base a los ultimos 5 minutos
       3. Añadir la nueva entrada a Final_dataset.dat
     """
-    for i, md_row in md.iterrows():
+    for _, md_row in md.iterrows():
       ide = md_row['id']
       clase = md_row['class']
       print(f'{ide} {clase} .... ', end='')
       
-      for j, d_row in d.iterrows():
+      for _, d_row in d.iterrows():
         # Si no son la misma serie, pasamos al siguiente
         if md_row['id'] != d_row['id']: continue
 
         # Ignorar el background de las muestras
-        if d_row['time'] < 0 or d_row['time'] > md_row['dt']: continue
+        if d_row['time']*60 < -MARGIN or d_row['time']*60 > md_row['dt']*60+MARGIN:
+          continue
 
         search_to = d_row['time']*60            # Muestra actual a minutos
         search_from = search_to - time_window   # Ventana de 5 minutos desde la que empezar a buscar
@@ -104,14 +105,17 @@ def build_dataframe(ds_filename, time_window):
         for f_o in FEATURES_ORIGINAL:
           # 1. Calcular medias, medianas y desviaciones de los atributos del df 'window'
           mean = window[f_o].mean()
-          median = window[f_o].median()
+          # median = window[f_o].median()
           dev = window[f_o].std(ddof=0)
           d_row[f'{f_o}_mean'] = mean
-          d_row[f'{f_o}_median'] = median
+          # d_row[f'{f_o}_median'] = median
           d_row[f'{f_o}_dev'] = dev
           
         # Guardar clase
-        d_row['class'] = md_row['class']
+        if d_row['time'] < 0 or d_row['time'] > md_row['dt']:
+          d_row['class'] = 'background'
+        else:
+          d_row['class'] = md_row['class']
         
         # 2. Esos nuevos valores obtenidos, meterlos a la entrada 'd_row' y guardarla: f.write(new_row)
         x = d_row[2:].to_string(index=False).split('\n')

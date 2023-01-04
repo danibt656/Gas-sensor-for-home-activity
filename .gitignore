@@ -4,9 +4,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 
-data/Final_dataset.dat
-data/HT_Sensor_dataset.dat
-data/ori/HT_Sensor_dataset.dat
+data/*
 
 ./*.png
 images/
