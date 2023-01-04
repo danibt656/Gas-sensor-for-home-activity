@@ -22,17 +22,30 @@ F_DATASET = "./data/HT_Sensor_dataset_new.dat"
 F_FINAL_DATASET = "./data/Final_dataset.dat"
 
 FEATURES_ORIGINAL = ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7', 'R8', 'Temp.', 'Humidity']
+# FEATURES = [
+#   'R1', 'R1_mean', 'R1_median', 'R1_dev',
+#   'R2', 'R2_mean', 'R2_median', 'R2_dev',
+#   'R3', 'R3_mean', 'R3_median', 'R3_dev',
+#   'R4', 'R4_mean', 'R4_median', 'R4_dev',
+#   'R5', 'R5_mean', 'R5_median', 'R5_dev',
+#   'R6', 'R6_mean', 'R6_median', 'R6_dev',
+#   'R7', 'R7_mean', 'R7_median', 'R7_dev',
+#   'R8', 'R8_mean', 'R8_median', 'R8_dev',
+#   'Temp.', 'Temp._mean', 'Temp._median', 'Temp._dev',
+#   'Humidity', 'Humidity_mean', 'Humidity_median', 'Humidity_dev',
+#   'class',
+# ]
 FEATURES = [
-  'R1', 'R1_mean', 'R1_median', 'R1_dev',
-  'R2', 'R2_mean', 'R2_median', 'R2_dev',
-  'R3', 'R3_mean', 'R3_median', 'R3_dev',
-  'R4', 'R4_mean', 'R4_median', 'R4_dev',
-  'R5', 'R5_mean', 'R5_median', 'R5_dev',
-  'R6', 'R6_mean', 'R6_median', 'R6_dev',
-  'R7', 'R7_mean', 'R7_median', 'R7_dev',
-  'R8', 'R8_mean', 'R8_median', 'R8_dev',
-  'Temp.', 'Temp._mean', 'Temp._median', 'Temp._dev',
-  'Humidity', 'Hum_mean', 'Hum_median', 'Hum_dev',
+  'R1', 'R1_mean', 'R1_dev',
+  'R2', 'R2_mean', 'R2_dev',
+  'R3', 'R3_mean', 'R3_dev',
+  'R4', 'R4_mean', 'R4_dev',
+  'R5', 'R5_mean', 'R5_dev',
+  'R6', 'R6_mean', 'R6_dev',
+  'R7', 'R7_mean', 'R7_dev',
+  'R8', 'R8_mean', 'R8_dev',
+  'Temp.', 'Temp._mean', 'Temp._dev',
+  'Humidity', 'Humidity_mean', 'Humidity_dev',
   'class',
 ]
 
@@ -123,40 +136,3 @@ def build_dataframe(ds_filename, time_window, MARGIN):
         f.write(','.join(new_row) + '\n')
       
       print('OK')
-    
-
-# def train_test_split(df, frac_test, attrs=FEATURES_ORIGINAL):
-#   """
-#   Divide un dataset en subconjuntos de entrenamiento y validacion
-  
-#   Args:
-#     frac_test: Porcentaje (sobre 100) de muestras para validacion
-#     attrs: Lista de atributos para datos (SIN clase)
-    
-#   Return:
-#     X_train:  dataframe con datos de entrenamiento
-#     y_train:  dataframe con clases de entrenamiento
-#     X_test:   dataframe con datos de validacion
-#     y_test:   dataframe con clases de validacion
-#   """
-#   # Construir particiones train/test
-#   num_ids = len(set(df['id']))
-#   num_test = np.floor((frac_test/100) * num_ids)
-#   test_indices = np.random.choice(list(set(df['id'])), size=num_test, replace=False)
-  
-#   is_for_test = []
-#   for id in df['id']:
-#     if id in test_indices:
-#       is_for_test.append(True)
-#     else:
-#       is_for_test.append(False)
-#   is_for_test = np.asarray(is_for_test)
-  
-#   train_df = df[~is_for_test]
-#   test_df = df[is_for_test]
-  
-#   # Dividir entre atributos y clases
-#   X_train, y_train = train_df[attrs].values, train_df['class'].values
-#   X_test, y_test = test_df[attrs].values, test_df['class'].values
-  
-#   return X_train, y_train, X_test, y_test
