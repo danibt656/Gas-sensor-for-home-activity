@@ -17,7 +17,7 @@ Project authors:
 For citations using BibTeX:
 
 ```
-@inproceedings{kim2019multiaccuracy,
+@inproceedings{aniv2023exploracion,
     title={Exploración de modelos de aprendizaje automático para la clasificación online de mediciones de sensores MOX-Humedad-Temperatura},
     author={Anivarro, Carlos and Barahona, Daniel and Cerrato, Daniel and Garitagoitia, David T.},
     year={2023},
