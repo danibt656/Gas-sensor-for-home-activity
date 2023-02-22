@@ -1,5 +1,7 @@
 # Gas-sensor-for-home-activity
 
+## *Exploration of Machine Learning models for online classification of MOX-Humidity-Temperature sensor metrics*
+
 The following is part of the final assignment of Fundamentals of Machine Learning, course 2022-23.
 
 Project authors:
@@ -11,6 +13,17 @@ Project authors:
 + Daniel Cerrato Sanchez: daniel.cerrato@estudiante.uam.es
 
 + David T. Garitagoitia Romero: david.garitagoitia@estudiante.uam.es
+
+For citations using BibTeX:
+
+```
+@inproceedings{kim2019multiaccuracy,
+    title={Exploración de modelos de aprendizaje automático para la clasificación online de mediciones de sensores MOX-Humedad-Temperatura},
+    author={Anivarro, Carlos and Barahona, Daniel and Cerrato, Daniel and Garitagoitia, David T.},
+    year={2023},
+    organization={UAM}
+}
+```
 
 ***
 
