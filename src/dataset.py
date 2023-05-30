@@ -22,19 +22,7 @@ F_DATASET = "./data/HT_Sensor_dataset_new.dat"
 F_FINAL_DATASET = "./data/Final_dataset.dat"
 
 FEATURES_ORIGINAL = ['R1', 'R2', 'R3', 'R4', 'R5', 'R6', 'R7', 'R8', 'Temp.', 'Humidity']
-# FEATURES = [
-#   'R1', 'R1_mean', 'R1_median', 'R1_dev',
-#   'R2', 'R2_mean', 'R2_median', 'R2_dev',
-#   'R3', 'R3_mean', 'R3_median', 'R3_dev',
-#   'R4', 'R4_mean', 'R4_median', 'R4_dev',
-#   'R5', 'R5_mean', 'R5_median', 'R5_dev',
-#   'R6', 'R6_mean', 'R6_median', 'R6_dev',
-#   'R7', 'R7_mean', 'R7_median', 'R7_dev',
-#   'R8', 'R8_mean', 'R8_median', 'R8_dev',
-#   'Temp.', 'Temp._mean', 'Temp._median', 'Temp._dev',
-#   'Humidity', 'Humidity_mean', 'Humidity_median', 'Humidity_dev',
-#   'class',
-# ]
+
 FEATURES = [
   'R1', 'R1_mean', 'R1_dev',
   'R2', 'R2_mean', 'R2_dev',
