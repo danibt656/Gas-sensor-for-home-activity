@@ -56,7 +56,6 @@ def get_dataset(build_dataset=False, time_window=5, margin=10):
   ds = pd.read_csv(F_FINAL_DATASET, sep=",")
   return ds
   
-  
  
 def build_dataframe(ds_filename, time_window, MARGIN):
   """
